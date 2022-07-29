@@ -16,6 +16,10 @@ const buscar = async() =>{
 
     let dados = data.results;
 
+    document.getElementById("titulo").setAttribute("onclick","ordenarPorTitulo("+JSON.stringify(dados)+")")
+    document.getElementById("ano").setAttribute("onclick","ordenarPorAno("+JSON.stringify(dados)+")")
+    document.getElementById("score").setAttribute("onclick","ordenarPorScore("+JSON.stringify(dados)+")")
+
     mostrarTabela(dados)
 }
 
@@ -45,4 +49,43 @@ function mostrarTabela(dados){
 const carregarImagem = (event, url) =>{
     event.preventDefault()
     document.getElementById("imagem").innerHTML = `<img src="${url} width="200px"/>"`
+}
+
+function ordenarPorTitulo(dados){
+    dados.sort((a,b) => a.title < b.title ? -1 : a.title > b.title ? 1 : 0);
+
+    if(document.getElementById("titulo").value == "1"){
+        dados.reverse();
+        mostrarTabela(dados);
+        document.getElementById("titulo").value = "0"
+    }else{
+        mostrarTabela(dados);
+        document.getElementById("titulo").value = "1"
+    }
+}
+
+function ordenarPorAno(dados){
+    dados.sort((a,b) => a.start_date < b.start_date ? -1 : a.start_date > b.start_date ? 1 : 0);
+
+    if(document.getElementById("ano").value == "1"){
+        dados.reverse();
+        mostrarTabela(dados);
+        document.getElementById("ano").value = "0"
+    }else{
+        mostrarTabela(dados)
+        document.getElementById("ano").value = "1"
+    }
+}
+
+function ordenarPorScore(dados){
+    dados.sort((a,b) => a.score < b.score ? -1 : a.score > b.score ? 1 : 0);
+
+    if(document.getElementById("score").value == "1"){
+        dados.reverse();
+        mostrarTabela(dados)
+        document.getElementById("score").value = "0";
+    }else{
+        mostrarTabela(dados)
+        document.getElementById("score").value = "1";
+    }
 }
