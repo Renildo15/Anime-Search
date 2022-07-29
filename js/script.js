@@ -8,6 +8,20 @@ function append(parent, Element){
 
 const buscar = async() =>{
     let input = document.getElementById('inp-search')
+    let tam = JSON.stringify(input.value).length - 2;
+
+    if(input.value == "" || tam < 2){
+        document.getElementById("msg-erro").style.visibility = "visible";
+        setTimeout(() => {
+            document.getElementById("msg-erro").style.visibility = "hidden";
+        }, 5000);
+        
+    }else{
+        document.getElementById("msg-erro").style.visibility = "hidden";
+        document.getElementById("loader").style.visibility = "visible";
+        document.getElementById("btn-search").style.visibility = "hidden";
+    }
+   
     let chave = document.getElementById('inp-search').value
     let url = 'https://api.jikan.moe/v3/search/anime?q='+ chave
 
@@ -20,10 +34,13 @@ const buscar = async() =>{
     document.getElementById("ano").setAttribute("onclick","ordenarPorAno("+JSON.stringify(dados)+")")
     document.getElementById("score").setAttribute("onclick","ordenarPorScore("+JSON.stringify(dados)+")")
 
+    document.getElementById("loader").style.visibility = "hidden"
     mostrarTabela(dados)
+    document.getElementById("btn-search").style.visibility = "visible";
 }
 
 function mostrarTabela(dados){
+    document.getElementById("tabela").style.visibility = "visible"
     document.getElementById("tbody").innerHTML=""
     return dados.map(function(dado){
         let tr = createNode('tr')
@@ -33,7 +50,7 @@ function mostrarTabela(dados){
         let td_img = createNode('td')
 
         let data = new Date(Date.parse(dado.start_date)).getFullYear();
-        td_titulo.innerHTML = `${dado.title}`;
+        td_titulo.innerHTML = `<a href="${dado.url} target="_blank">${dado.title}<a/>`;
         td_ano.innerHTML = `${data}`;
         td_score.innerHTML = `${dado.score}`;
         td_img.innerHTML = `<a href="#" onclick="carregarImagem(event,'${dado.image_url}')">Carregar</a>` 

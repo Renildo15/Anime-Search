@@ -1,0 +1,135 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+}
+
+header{
+    height: 220px;
+    text-align: center;
+    align-items: center;
+    padding: 40px;
+    background-color: rgb(255, 103, 103);
+}
+
+
+h1{
+    padding-top: 10px;
+    text-align: center;
+    font-size: 40px;
+    color: #fff;
+    text-transform: capitalize;
+}
+
+#div-form{
+    display: flex;
+    margin-left: 500px;
+    padding-top: 10px;
+}
+
+.input{
+    width: 300px;
+    height: 35px;
+    padding: 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 50px;
+    margin-right: 10px;
+    padding-left: 10px;
+    background-color: #fff;
+}
+
+.input::placeholder{
+    color: black;
+}
+
+.button{
+    border: 1px solid #fff;
+    width: 85px;
+    margin-right: 10px;
+    outline: 0;
+    background-color: transparent;
+    color: #fff;
+    border-radius: 3px;
+    font-weight: bold;
+    transition: all ease 0.3s;
+    cursor: pointer;
+}
+
+.button:hover{
+    background-color: black;
+    border: none;
+}
+
+.loader{
+    border: 5px solid #f3f3fe;
+    border-radius: 50%;
+    border-top: 5px solid black;
+    margin-top: 5px;
+    width: 20px;
+    height: 20px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+    visibility: hidden;
+}
+
+@-webkit-keyframes spin{
+    0% {-webkit-transform: rotate(0deg);}
+    100% {-webkit-transform: rotate(360deg);}
+}
+
+@keyframes spin{
+    0% {transform: rotate(0deg);}
+    100% {transform: rotate(360deg);}
+}
+#msg-erro{
+    visibility: hidden;
+}
+
+#msg-erro h4{
+    color: white;
+    font-weight: bold;
+    font-size: small;
+    margin-top: 20px;
+}
+
+
+.tabela{
+    border-collapse: collapse;
+    margin-top: 20px;
+    margin-left: 200px;
+    margin-bottom: 50px;
+    width: 50%;
+    float: left;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    visibility: hidden;
+}
+
+.tabela th, .tabela td{
+    border: 1px solid #ddd;
+    padding: 20px;
+}
+
+.tabela tr:nth-child(even){background-color: rgb(255, 103, 103);}
+
+.tabela tr:hover {background-color: rgb(255, 166, 166);}
+
+.tabela th{
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: rgb(255, 103, 103) ;
+    color: white;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+#imagem{
+    float: right;
+    padding-right: 200px;
+    padding-top: 28px;
+}
