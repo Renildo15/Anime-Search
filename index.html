@@ -11,39 +11,39 @@
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Mochiy+Pop+One&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header id="header" class="header">
-        <h1 class="titulo">Busque seus animes</h1>
+  <div class="container">
+    <header id="header">
+      <h1>Busque pelo o seu anime favorito...</h1>
 
-        <div id="div-form">
-          <input id="inp-search" class="input" placeholder="Digite o nome do anime">
-          <button id="button" class="btn-search">Buscar</button>
-          <div id="loader" class="loader"></div>
-        </div>
+      <div id="div-form">
+        <input class="input" id="inp-search" id="name" placeholder="Digite aqui...">
+        <button id="btn-search" onclick="buscar()" class="button" type="button">Buscar</button>
+        <div id="loader" class="loader"></div>
+      </div>
 
-        <div id="msg-erro">
-          <h4>
-            Insira uma palavra com mais de 3 caracteres !
-          </h4>
-        </div>
+      <div id="msg-erro">
+        <h4>
+          Você inseriu menos que 3 caracteres !<br>
+          Por favor realize uma nova pesquisa.
+        </h4>
+      </div>
     </header>
 
-    <section id="section-body">
-      <table class="styled-table" id="tabela">
+    <div id="conteudo">
+      <table id="tabela" class="tabela">
         <thead>
           <tr>
-            <th id="th_title" value="0"> Título </th>
-            <th id="th_ano" value="0"> Ano </th>
-            <th id="th_score" value="0"> Score </th>
-            <th> Imagem </th> 
+            <th id="titulo" value="0">Titulo</th>
+            <th id="ano" value="0">Ano</th>
+            <th id="score" value="0">Score</th>
+            <th>Imagem</th>
           </tr>
         </thead>
-        <tbody id="tbody">
-
-        </tbody>
+        <tbody id="tbody"></tbody>
       </table>
       <div id="imagem"></div>
-    </section>
-
+    </div>
+  </div>
     <script src="/js/script.js"></script>
 </body>
 </html>

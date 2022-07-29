@@ -1,80 +1,48 @@
-function createNode(element){
-    return document.createElement(element);
+function createNode(Element){
+    return document.createElement(Element);
 }
 
-function Append(parent, el){
-    return parent.appendChild(el);
+function append(parent, Element){
+    return parent.appendChild(Element);
 }
 
-function carregarImagem(event, url){
-    event.preventDefault();
-    document.getElementById("imagem").innerHTML = `<img src = "${url}" width="200px"/>`
+const buscar = async() =>{
+    let input = document.getElementById('inp-search')
+    let chave = document.getElementById('inp-search').value
+    let url = 'https://api.jikan.moe/v3/search/anime?q='+ chave
+
+    const response = await fetch(url)
+    const data = await response.json()
+
+    let dados = data.results;
+
+    mostrarTabela(dados)
 }
-
-
-function ordenarPorTitulo(dados){
-    dados.sort((a,b) => a.title < b.title ? -1 : a.title > b.title ? 1 : 0);
-
-    if(document.getElementById("th_title").value = "1"){
-        dados.reverse();
-        mostrarTabela(dados);
-        document.getElementById("th_title").value = "0";
-    }else{
-        mostrarTabela(dados);
-        document.getElementById("th_title").value = "1";
-    }
-}
-
-
-function ordenarAno(dados){
-    dados.sort((a,b)=> a.start_date < b.start_date ? -1 : a.start_date > b.start_date ? 1 : 0);
-
-    if(document.getElementById("th_year").value = "1"){
-        dados.reverse();
-        mostrarTabela(dados)
-        document.getElementById("th_year").value = "0";
-    }else{
-        mostrarTabela(dados)
-        document.getElementById("th_year").value = "1";
-    }
-}
-function ordenarAno(dados){
-    dados.sort((a,b)=> a.score < b.score ? -1 : a.score > b.score ? 1 : 0);
-
-    if(document.getElementById("th_score").value = "1"){
-        dados.reverse();
-        mostrarTabela(dados)
-        document.getElementById("th_score").value = "0";
-    }else{
-        mostrarTabela(dados)
-        document.getElementById("th_score").value = "1";
-    }
-}
-
 
 function mostrarTabela(dados){
-    document.getElementById("tabela").style.visibility = "visible"
-    let tbody = document.getElementById("tbody").innerHTML = ""
-
-    return dados.map(function(dado) {
-        let tr = createNode("tr");
-        let td_title = createNode("td");
-        let td_year = createNode("td");
-        let td_score = createNode("td");
-        let td_image = createNode("td");
+    document.getElementById("tbody").innerHTML=""
+    return dados.map(function(dado){
+        let tr = createNode('tr')
+        let td_titulo = createNode('td')
+        let td_ano = createNode('td')
+        let td_score = createNode('td')
+        let td_img = createNode('td')
 
         let data = new Date(Date.parse(dado.start_date)).getFullYear();
+        td_titulo.innerHTML = `${dado.title}`;
+        td_ano.innerHTML = `${data}`;
+        td_score.innerHTML = `${dado.score}`;
+        td_img.innerHTML = `<a href="#" onclick="carregarImagem(event,'${dado.image_url}')">Carregar</a>` 
 
-        td_title.innerHTML=`<a href ="${dado.url} target="blank">${dado.title}</a>`;
-        td_year.innerHTML=`${dado.data}`;
-        td_score.innerHTML = `${data.score}`;
-        td_image.innerHTML = `<a href="#" onclick="carregarImagem(event,'${dado.image_url}')">Carregar</a>`
-
-        Append(tr, td_title);
-        Append(tr,td_year);
-        Append(tr, td_score);
-        Append(tr, td_image);
-        Append(tbody, tr)
+        append(tr, td_titulo);
+        append(tr, td_ano);
+        append(tr, td_score);
+        append(tr, td_img);
+        append(tbody, tr)
     })
+}
 
+const carregarImagem = (event, url) =>{
+    event.preventDefault()
+    document.getElementById("imagem").innerHTML = `<img src="${url} width="200px"/>"`
 }
